@@ -6,9 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>PHP PAI</h1>
     
-    <form action=""></form>
-    <form action=""></form>
 </body>
 </html>
+
+<?php 
+    $user = $_POST["user"];
+    $passw = $_POST["password"];
+    
+    echo "Usuario: " . $user . "<br>";
+    echo "Contraseña: " . $passw;
+?>
