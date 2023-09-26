@@ -1,60 +1,50 @@
-<?php 
-    session_start(); 
+<?php
+session_start();
+$pageTitle = "Página de Inicio";
 
-    if (isset($_SESSION['login_message'])) {
-        $content = $_SESSION['login_message'];    
-        unset($_SESSION['login_message']);
-    }
+$content = null;
 
-    // Comprueba si el usuario está logeado
-    $estaLogeado = isset($_SESSION['login_message']); // Cambia 'usuario' por el nombre de tu variable de sesión para el usuario
+if (isset($_SESSION['login_message'])) {
+    $content = $_SESSION['login_message'];
+    unset($_SESSION['login_message']);
+}
+
+$loggedIn = isset($_SESSION['user']);
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Inicio de Sesión</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>        
-    <?php require_once './views/header.php'?>
+<?php require_once './views/header.php' ?>
 
-    <div class="container mt-5">
-        <?php if (!$estaLogeado) : ?>
-            <!-- Mostrar el formulario de inicio de sesión si no está logeado -->
-            <h2>Iniciar Sesión</h2>
+<?php if (!$loggedIn || !$content) { ?>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <h2 class="text-center text-white">Iniciar Sesión</h2>
             <form action="./procesoLogin.php" method="post">
-                <div class="form-group">
-                    <label for="user">User:</label>
+                <div class="mb-3">
+                    <label for="user" class="form-label text-white">Usuario</label>
                     <input type="text" class="form-control" name="user" required>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
+                <div class="mb-3">
+                    <label for="password" class="form-label text-white">Password</label>
                     <input type="password" class="form-control" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </div>
             </form>
-        <?php else : ?>
-            <!-- Mostrar un mensaje personalizado si está logeado -->
-            <h2>Bienvenido, Usuario</h2>
-            <!-- Puedes personalizar el mensaje y mostrar contenido adicional aquí -->
-        <?php endif; ?>
-
-        <?php
-        if (isset($content)) {
-            if ($content == "Logeo correcto") {
-                echo '<div class="alert alert-success mt-3">' . $content . '</div>';
-            } else {
-                echo '<div class="alert alert-danger mt-3">' . $content . '</div>';
-            }
-        }
-        ?>
+        </div>
     </div>
-    </br>
+<?php } else { ?>
+    <div class="mt-5">
+        <h2 class="text-center text-white">Bienvenido, <?php echo $_SESSION['user']; ?></h2>
+    </div>
+<?php } ?>
 
-    <?php require_once './views/footer.php'?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
-</html>
+<?php
+if (isset($content)) {
+    $alertClass = $content ? 'alert-success' : 'alert-danger';
+    $message = $content ? 'Logeo Correcto' : 'Logeo Incorrecto';
+    echo '<div class="alert ' . $alertClass . ' mt-3 text-center">' . $message . '</div>';
+}
+?>
+
+<?php require_once './views/footer.php' ?>

@@ -1,17 +1,18 @@
 <?php
-    session_start(); 
+session_start();
 
-    $user = $_POST["user"];
-    $passw = $_POST["password"];
-    $content;
+$user = $_POST["user"];
+$passw = $_POST["password"];
+$content;
 
-    if ($user == "fcytuader" && $passw == "programacionavanzada"){
-        $content = "Logeo correcto";
-    } else {
-        $content = "Logeo incorrecto";  
-    }
+if ($user == "fcytuader" && $passw == "programacionavanzada") {
+    $content = true;
+    $_SESSION['user'] = $user;
+} else {
+    $content = false;
+}
 
-    $_SESSION['login_message'] = $content;
-    header("Location: inicio.php");
-    exit();
+$_SESSION['login_message'] = $content;
+header("Location: inicio.php");
+exit();
 ?>
