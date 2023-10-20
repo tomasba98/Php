@@ -11,7 +11,7 @@
 
       $a = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
       
-      $length = 20;
+      $length = 6;
       
       for ($i = 0; $i < $length; $i++)
       {

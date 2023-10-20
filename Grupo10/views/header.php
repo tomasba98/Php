@@ -11,6 +11,6 @@
 
 <body class="bg-dark">
     <header class="bg-dark text-white text-center py-3">
-        <img src="./views/encabezado.JPG" class="img-fluid" alt="Encabezado">
+        <img src="./views/encabezado.jpg" class="img-fluid" alt="Encabezado">
     </header>
     <div class="container mt-3">

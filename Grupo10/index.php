@@ -9,6 +9,9 @@ if (isset($_SESSION['login_message'])) {
     unset($_SESSION['login_message']);
 }
 
+$token = rand(5, 1500);
+$_SESSION ['token'] = $token;
+
 $loggedIn = isset($_SESSION['user']);
 ?>
 
@@ -27,6 +30,16 @@ $loggedIn = isset($_SESSION['user']);
                     <label for="password" class="form-label text-white">Password</label>
                     <input type="password" class="form-control" name="password" required>
                 </div>
+
+                <div class=" mb-3">
+                <br>
+                     <img src="./rdnimg.php" >
+                     <input type="text" name="rand_code" value="" required>
+                </div>
+
+                <br>
+
+                </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 </div>
@@ -35,7 +48,7 @@ $loggedIn = isset($_SESSION['user']);
     </div>
 <?php } else { ?>
     <div class="mt-5">
-        <h2 class="text-center text-white">Bienvenido, <?php echo $_SESSION['user']; ?></h2>
+        <h2 class="text-center text-white">Bienvenido, <?php echo $_SESSION['user']; ?> !</h2>
     </div>
 <?php } ?>
 
